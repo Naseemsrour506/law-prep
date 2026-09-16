@@ -1,6 +1,22 @@
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
+  const [backendStatus, setBackendStatus] = useState("בודק...");
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/health")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "ok") {
+          setBackendStatus("מחובר");
+        }
+      })
+      .catch(() => {
+        setBackendStatus("לא מחובר");
+      });
+  }, []);
+
   return (
     <div className="landing-page" dir="rtl">
       <div className="landing-card">
@@ -21,6 +37,10 @@ function App() {
             הרשמה
           </button>
         </div>
+
+        <p className="backend-status">
+          מצב השרת: {backendStatus}
+        </p>
       </div>
     </div>
   );
