@@ -1,28 +1,20 @@
-import "./App.css";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import LandingPage from "./pages/LandingPage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import DashboardPage from "./pages/DashboardPage";
 
 function App() {
   return (
-    <div className="landing-page" dir="rtl">
-      <div className="landing-card">
-        <h1>Law Prep</h1>
-
-        <h2>הכנה למבחן לשכת עורכי הדין</h2>
-
-        <p>
-          תרגל שאלות, בצע סימולציות ועקוב אחרי ההתקדמות שלך.
-        </p>
-
-        <div className="actions">
-          <button className="primary-button">
-            התחברות
-          </button>
-
-          <button className="secondary-button">
-            הרשמה
-          </button>
-        </div>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
